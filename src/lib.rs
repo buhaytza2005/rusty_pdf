@@ -356,9 +356,12 @@ impl PDFSigningDocument {
             Operation::new(
                 "cm",
                 vec![
-                    1, 0, //a and b - scaling factors
-                    0, -1, // c and d rotation factors
-                    0, 0, // e and f: translation
+                    lopdf::Object::Integer(1),
+                    lopdf::Object::Integer(0), //a and b - scaling factors
+                    lopdf::Object::Integer(0),
+                    lopdf::Object::Integer(-1), // c and d rotation factors
+                    lopdf::Object::Integer(0),
+                    lopdf::Object::Integer(0), // e and f: translation
                 ],
             ),
             Operation::new("BT", vec![]),
