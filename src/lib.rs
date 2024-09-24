@@ -333,7 +333,17 @@ impl PDFSigningDocument {
         let operations = vec![
             Operation::new("BT", vec![]),
             Operation::new("Tf", vec!["F1".into(), font_size.into()]),
-            Operation::new("Td", vec![x.into(), y.into()]),
+            Operation::new(
+                "Tm",
+                vec![
+                    1.0.into(),
+                    0.0.into(), //a and b - scaling factors
+                    0.0.into(),
+                    1.0.into(), // c and d rotation factors
+                    x.into(),
+                    y.into(),
+                ],
+            ),
             Operation::new("Tj", vec![Object::string_literal(text)]),
             Operation::new("ET", vec![]),
         ];
