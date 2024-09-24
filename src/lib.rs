@@ -352,6 +352,7 @@ impl PDFSigningDocument {
         */
 
         let operations = vec![
+            /*
             Operation::new("q", vec![]), // save graphics state
             Operation::new(
                 "cm",
@@ -359,14 +360,15 @@ impl PDFSigningDocument {
                     lopdf::Object::Integer(1),
                     lopdf::Object::Integer(0), //a and b - scaling factors
                     lopdf::Object::Integer(0),
-                    lopdf::Object::Integer(-1), // c and d rotation factors
+                    lopdf::Object::Integer(1), // c and d rotation factors
                     lopdf::Object::Integer(0),
                     lopdf::Object::Integer(0), // e and f: translation
                 ],
             ),
+            */
             Operation::new("BT", vec![]),
             Operation::new("Tf", vec!["F1".into(), font_size.into()]),
-            Operation::new("Tm", vec![x.into(), y.into()]),
+            Operation::new("Td", vec![x.into(), y.into()]),
             Operation::new("Tj", vec![Object::string_literal(text)]),
             Operation::new("ET", vec![]),
             Operation::new("Q", vec![]), // restore graphics state
