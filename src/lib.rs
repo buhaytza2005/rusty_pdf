@@ -330,6 +330,8 @@ impl PDFSigningDocument {
 
         let (x, y) = dimensions;
 
+        /*
+         * try resetting the text matrix
         let operations = vec![
             Operation::new("BT", vec![]),
             Operation::new("Tf", vec!["F1".into(), font_size.into()]),
@@ -346,6 +348,28 @@ impl PDFSigningDocument {
             ),
             Operation::new("Tj", vec![Object::string_literal(text)]),
             Operation::new("ET", vec![]),
+        ];
+        */
+
+        let operations = vec![
+            Operation::new("q", vec![]), // save graphics state
+            Operation::new(
+                "cm",
+                vec![
+                    1.0.into(),
+                    0.0.into(), //a and b - scaling factors
+                    0.0.into(),
+                    1.0.into(), // c and d rotation factors
+                    0.0.into(),
+                    0.0.into(), // e and f: translation
+                ],
+            ),
+            Operation::new("BT", vec![]),
+            Operation::new("Tf", vec!["F1".into(), font_size.into()]),
+            Operation::new("Td", vec![x.into(), y.into()]),
+            Operation::new("Tj", vec![Object::string_literal(text)]),
+            Operation::new("ET", vec![]),
+            Operation::new("Q", vec![]), // restore graphics state
         ];
 
         for i in operations {
