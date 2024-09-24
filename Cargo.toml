@@ -12,7 +12,7 @@ repository = "https://github.com/joshpauline/rusty_pdf"
 
 [dependencies]
 log = "0.4.14"
-lopdf = { version = "0.27.0", features = [
+lopdf = { version = "0.34.0", features = [
     "chrono_time",
     "nom_parser",
     "embed_image"
