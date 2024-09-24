@@ -377,10 +377,10 @@ impl PDFSigningDocument {
                     if child_rect.len() >= 4 {
                         // Found a reference, set as return value
                         rect = Some(Rectangle {
-                            x1: child_rect[0].as_f64()?,
-                            y1: child_rect[1].as_f64()?,
-                            x2: child_rect[2].as_f64()?,
-                            y2: child_rect[3].as_f64()?,
+                            x1: extract_f64(&child_rect[0])?,
+                            y1: extract_f64(&child_rect[1])?,
+                            x2: extract_f64(&child_rect[2])?,
+                            y2: extract_f64(&child_rect[3])?,
                         });
                     }
                 }
@@ -471,5 +471,14 @@ impl PDFSigningDocument {
             .change_page_content(page_id, content.encode()?)?;
 
         Ok(())
+    }
+}
+// helper function to satisfy the lopdf update
+// https://github.com/ralpha/pdf_signing/issues/4
+fn extract_f64(object: &lopdf::Object) -> Result<f64, Error> {
+    match object {
+        lopdf::Object::Real(val) => Ok(*val as f64),
+        lopdf::Object::Integer(val) => Ok(*val as f64),
+        _ => Err(Error::Other("Expected numberic value".to_string())),
     }
 }
