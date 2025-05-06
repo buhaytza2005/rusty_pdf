@@ -16,7 +16,7 @@ lopdf = { version = "0.34.0", features = [
     "chrono_time",
     "nom_parser",
     "embed_image"
-], default-features = false, git = "https://github.com/J-F-Liu/lopdf", branch = "master" }
+], default-features = false, git = "https://github.com/J-F-Liu/lopdf", branch = "main" }
 png = "0.17.2"
 imagesize = "0.9"
 headless_chrome = "0.9.0"
