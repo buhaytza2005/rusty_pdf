@@ -12,11 +12,7 @@ repository = "https://github.com/joshpauline/rusty_pdf"
 
 [dependencies]
 log = "0.4.14"
-lopdf = { version = "0.34.0", features = [
-    "chrono_time",
-    "nom_parser",
-    "embed_image"
-], default-features = false, git = "https://github.com/J-F-Liu/lopdf", branch = "main" }
+lopdf = { version = "0.36.0"}
 png = "0.17.2"
 imagesize = "0.9"
 headless_chrome = "0.9.0"
